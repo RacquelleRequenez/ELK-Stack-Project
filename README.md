@@ -25,7 +25,7 @@ Load balancing ensures that the application will be highly available, in additio
 - Load balancers protect availability. Load balancers distribute network traffic across multiple servers. A load balancer can protect from DoS attacks. A jump box adds a security layer to the web servers by preventing them from being exposed to the public. 
 
 Integrating an ELK server allows users to easily monitor the vulnerable VMs for changes to the metrics and system files.
-- Filebeat watches for log files and log events. Filebeat collects data about the file system. Filebeat watches for when and if a file changes.
+- Filebeat collects data about the file system.
 - Metricbeat collects machine metrics. 
 
 The configuration details of each machine may be found below.
@@ -69,7 +69,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![Dockerps.png](Images/Docker ps.png)
+![Dockerps.png](Images/Dockerps.png)
 
 ### Target Machines & Beats
 This ELK server is configured to monitor the following machines:
@@ -86,21 +86,5 @@ In order to use the playbook, you will need to have an Ansible control node alre
 
 SSH into the control node and follow the steps below:
 - Copy the elk-playbook.yml file to /etc/ansible/roles/install-elk/tasks.
-- Update the host file to include the IP of the elk machine. 
-  -[webservers]
-    #alpha.example.org
-    #beta.example.org
-    #192.168.1.100
-    #192.168.1.11
-    10.0.0.5 ansible_python_interpreter=/usr/bin/python3
-    10.0.0.6 ansible_python_interpreter=/usr/bin/python3
-    [elk]
-    10.1.0.4 ansible_python_interpreter=/usr/bin/python3
+- Update the host file to include the IP of the elk machine. To specify which machine to install on the ELK server on versus which to install Filebeat on, a user specifies which group to run them on. This allows a user to run certain playbooks on some machines, but not others.  
 - Run the playbook, and navigate to Kibana (52.186.105.211:5601) to check that the installation worked as expected.
-
-_TODO: Answer the following questions to fill in the blanks:_
-- _Which file is the playbook? Where do you copy it?_ elk-playbook.yml. Copied into etc/ansible/roles/install-elk/tasks
-- _Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on?_ Edit hosts file to include the specific machine. Specify the group by bracketing it. etc/ansible/hosts
-
-
-
